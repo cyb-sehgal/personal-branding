@@ -19,15 +19,12 @@ Personal cybersecurity portfolio showcasing my experience in SOC operations, SIE
 * JavaScript
 * GitHub Pages
 
-## Live Portfolio
 
-Coming Soon
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](realrahul.me)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rahulkram/)
 
-## Contact
 
-* [LinkedIn (https://linkedin.com/in/rahulkram)]
-* GitHub: https://github.com/cyb-sehgal
 
----
 
 Built to document my cybersecurity journey, projects, labs, and professional experience.
