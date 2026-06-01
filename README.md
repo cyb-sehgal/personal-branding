@@ -25,7 +25,7 @@ Coming Soon
 
 ## Contact
 
-* LinkedIn: https://linkedin.com/in/rahulkram
+* [LinkedIn (https://linkedin.com/in/rahulkram)]
 * GitHub: https://github.com/cyb-sehgal
 
 ---
