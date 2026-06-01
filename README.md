@@ -1,16 +1,33 @@
 # Cybersecurity Portfolio
 
-## Deploy on GitHub Pages
+Personal cybersecurity portfolio showcasing my experience in SOC operations, SIEM engineering, threat detection, incident response, and cybersecurity training.
 
-1. Create a new GitHub repository.
-2. Upload all files from this package.
-3. Go to Settings → Pages.
-4. Source: Deploy from a branch.
-5. Branch: main / root.
-6. Save and wait a few minutes.
+## Highlights
 
-## Optional
-- Put your resume in assets/resume.pdf
-- Put your profile photo in assets/profile.jpg
-- Add project screenshots to assets/screenshots/
-- Configure a custom domain using CNAME
+* Microsoft Sentinel Lab
+* Custom SIEM Platform
+* Network Intrusion Detection System (Snort)
+* Threat Detection & Incident Response
+* Azure & Entra ID Security
+* Cybercrime Investigation Training
+* Trained 170+ professionals, including law enforcement personnel and Indian Army personnel at AEC Pachmarhi
+
+## Tech Stack
+
+* HTML5
+* CSS3
+* JavaScript
+* GitHub Pages
+
+## Live Portfolio
+
+Coming Soon
+
+## Contact
+
+* LinkedIn: https://linkedin.com/in/rahulkram
+* GitHub: https://github.com/cyb-sehgal
+
+---
+
+Built to document my cybersecurity journey, projects, labs, and professional experience.
