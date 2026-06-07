@@ -1,340 +1,1879 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rahul K. | Cybersecurity Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --teal: #1D9E75; --teal-dim: #0F6E56; --teal-bright: #5DCAA5; --teal-glow: #9FE1CB; --teal-faint: #E1F5EE;
-    --dark-bg: #0a0f0d; --panel: #0f1814; --panel2: #131f1a; --border: rgba(29,158,117,0.2); --border-bright: rgba(93,202,165,0.4);
-    --text: #e8f5f0; --muted: #7ab89a; --faint: #3d6b57; --amber: #EF9F27; --red: #E24B4A; --blue: #378ADD;
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Syne', sans-serif; background: var(--dark-bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
-  body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px); pointer-events: none; z-index: 0; }
-  .container { max-width: 960px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
-  .mono { font-family: 'JetBrains Mono', monospace; }
-  nav { border-bottom: 1px solid var(--border); padding: 1rem 0; position: sticky; top: 0; background: rgba(10,15,13,0.95); backdrop-filter: blur(12px); z-index: 100; }
-  .nav-inner { display: flex; justify-content: space-between; align-items: center; }
-  .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--teal); letter-spacing: 0.05em; }
-  .nav-logo span { color: var(--muted); }
-  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-  .nav-links a { font-size: 12px; color: var(--muted); text-decoration: none; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--teal-bright); }
-  .hero { padding: 5rem 0 4rem; }
-  .hero-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--teal); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px; }
-  .hero-tag::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--teal); }
-  .blink { display: inline-block; width: 8px; height: 14px; background: var(--teal); margin-left: 4px; animation: blink 1s step-end infinite; vertical-align: middle; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-  h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
-  h1 em { font-style: normal; color: var(--teal-bright); display: block; }
-  .hero-title-last { color: rgba(232,245,240,0.3); }
-  .hero-sub { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted); margin: 1.5rem 0 2rem; max-width: 540px; line-height: 1.8; }
-  .hero-sub .highlight { color: var(--teal-bright); }
-  .hero-stats { display: flex; gap: 2.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
-  .stat { border-left: 2px solid var(--teal); padding-left: 12px; }
-  .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--teal-bright); line-height: 1; }
-  .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--faint); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
-  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; border-radius: 4px; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; }
-  .btn-primary { background: var(--teal); color: #0a0f0d; font-weight: 700; }
-  .btn-primary:hover { background: var(--teal-bright); }
-  .btn-outline { background: transparent; color: var(--teal-bright); border: 1px solid var(--border-bright); }
-  .btn-outline:hover { background: rgba(29,158,117,0.1); }
-  section { padding: 4rem 0; border-top: 1px solid var(--border); }
-  .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--teal); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .sec-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 2rem; }
-  .terminal { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-  .terminal-bar { background: var(--panel2); padding: 10px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
-  .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
-  .terminal-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--faint); margin-left: auto; margin-right: auto; }
-  .terminal-body { padding: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.9; }
-  .t-prompt { color: var(--teal); } .t-cmd { color: var(--text); } .t-out { color: var(--muted); padding-left: 1rem; }
-  .t-key { color: var(--teal-bright); } .t-val { color: var(--text); } .t-str { color: var(--amber); }
-  .timeline { position: relative; padding-left: 2rem; }
-  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
-  .tl-item { position: relative; margin-bottom: 2.5rem; }
-  .tl-dot { position: absolute; left: -2rem; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--dark-bg); border: 2px solid var(--teal); transform: translateX(-5.5px); }
-  .tl-dot.active { background: var(--teal); box-shadow: 0 0 12px var(--teal); }
-  .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 4px; }
-  .tl-title { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
-  .tl-org { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
-  .tl-bullets { list-style: none; }
-  .tl-bullets li { font-size: 13px; color: var(--muted); padding: 3px 0; padding-left: 14px; position: relative; line-height: 1.6; }
-  .tl-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--teal); font-size: 10px; top: 5px; }
-  .tl-metric { color: var(--teal-bright); font-weight: 600; }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
-  .proj-card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; transition: border-color 0.2s, transform 0.2s; }
-  .proj-card:hover { border-color: var(--teal); transform: translateY(-2px); }
-  .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-  .proj-icon { font-size: 20px; }
-  .proj-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--teal); border: 1px solid var(--border-bright); padding: 2px 8px; border-radius: 20px; letter-spacing: 0.1em; }
-  .proj-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-  .proj-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
-  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; background: rgba(29,158,117,0.1); color: var(--teal-bright); padding: 2px 8px; border-radius: 3px; }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-  .skill-cat { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
-  .skill-cat-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--teal); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .skill-cat-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .skill-list { display: flex; flex-wrap: wrap; gap: 6px; }
-  .skill-pill { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); border: 1px solid var(--border); padding: 3px 10px; border-radius: 20px; transition: all 0.2s; }
-  .skill-pill:hover { border-color: var(--teal); color: var(--teal-bright); }
-  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
-  .cert-card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; display: flex; align-items: flex-start; gap: 12px; }
-  .cert-icon { width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-  .cert-icon.ms { background: rgba(55,138,221,0.15); } .cert-icon.ec { background: rgba(239,159,39,0.15); } .cert-icon.gc { background: rgba(29,158,117,0.15); }
-  .cert-name { font-size: 13px; font-weight: 700; margin-bottom: 3px; line-height: 1.3; }
-  .cert-issuer { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
-  .cert-status { font-family: 'JetBrains Mono', monospace; font-size: 9px; margin-top: 4px; }
-  .cert-status.done { color: var(--teal); } .cert-status.progress { color: var(--amber); }
-  .cert-link { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--teal-bright); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-top: 5px; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
-  .cert-link:hover { border-color: var(--teal-bright); }
-  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
-  .contact-item { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; text-decoration: none; color: var(--text); transition: all 0.2s; }
-  .contact-item:hover { border-color: var(--teal); background: rgba(29,158,117,0.05); }
-  .contact-item-icon { font-size: 1.5rem; margin-bottom: 6px; }
-  .contact-item-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 4px; }
-  .contact-item-val { font-size: 12px; color: var(--muted); word-break: break-all; }
-  footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; }
-  footer p { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--faint); }
-  footer span { color: var(--teal); }
-  @media(max-width:600px){ h1 { font-size: 2.5rem; } .hero-stats { gap: 1.5rem; } .nav-links { display: none; } }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Rahul K. - SOC Analyst, SIEM Engineer, and Threat Detection Enthusiast. Explore cybersecurity projects, certifications, and professional experience." />
+  <meta name="keywords"
+    content="SOC Analyst, SIEM Engineer, Microsoft Sentinel, Splunk, Threat Detection, Cybersecurity Portfolio, Blue Team, Security Operations" />
+  <meta name="author" content="Rahul K." />
+  <meta property="og:title" content="Rahul K. | SOC Analyst & SIEM Engineer" />
+  <meta property="og:description"
+    content="Entry-Level SOC Analyst with hands-on SIEM engineering, threat detection, and incident response experience." />
+  <meta property="og:type" content="website" />
+  <title>Rahul K. | SOC Analyst & SIEM Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=1.3.0" />
+  <link rel="stylesheet" href="css/animations.css?v=1.3.0" />
 </head>
-<body>
 
-<nav>
-  <div class="container nav-inner">
-    <div class="nav-logo mono">rahul<span>@soc</span>:~$<span class="blink"></span></div>
-    <ul class="nav-links">
-      <li><a href="#about">about</a></li>
-      <li><a href="#experience">experience</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#skills">skills</a></li>
-      <li><a href="#certs">certs</a></li>
-      <li><a href="#contact">contact</a></li>
-    </ul>
+<body data-theme="dark">
+
+  <!-- Inline theme script: prevents flash of wrong theme on load -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('portfolio-theme');
+        if (t) document.body.setAttribute('data-theme', t);
+      } catch (e) { }
+    })();
+  </script>
+
+  <!-- ============================================ NAVIGATION ============================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo" aria-label="Rahul K. Home">
+        <span class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </span>
+        <span class="logo-text">RK.</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#training" class="nav-link">Training</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#certifications" class="nav-link">Certifications</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <a href="assets/resume.pdf" download class="btn-resume" id="downloadResume">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span>Download Resume</span>
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================================== HERO SECTION =========================================== -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <canvas id="networkCanvas"></canvas>
+    </div>
+    <div class="hero-container">
+      <div class="hero-content fade-in-up">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          OPEN TO SOC ANALYST OPPORTUNITIES
+        </div>
+        <h1 class="hero-headline">
+          <span class="headline-line">Rahul K.</span>
+        </h1>
+        <p class="hero-role">
+          <span class="role-item">SOC Analyst</span>
+          <span class="role-sep">|</span>
+          <span class="role-item">SIEM Engineer</span>
+          <span class="role-sep">|</span>
+          <span class="role-item">Threat Detection Enthusiast</span>
+        </p>
+        <p class="hero-desc">
+          Entry-Level SOC Analyst with hands-on experience in SIEM monitoring, alert triage, incident investigation,
+          threat detection, and security operations using Microsoft Sentinel, Splunk, QRadar, Snort IDS/IPS, Azure
+          Security Services, and Threat Intelligence Platforms.
+        </p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+            </svg>
+            View Projects
+          </a>
+          <a href="assets/resume.pdf" download class="btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Resume
+          </a>
+          <a href="#contact" class="btn-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            Contact Me
+          </a>
+        </div>
+        <div class="tech-pills">
+          <span class="pill">Microsoft Sentinel</span>
+          <span class="pill">Splunk</span>
+          <span class="pill">Azure</span>
+          <span class="pill">Snort</span>
+          <span class="pill">KQL</span>
+          <span class="pill">Python</span>
+          <span class="pill">PowerShell</span>
+          <span class="pill">Threat Detection</span>
+        </div>
+        <!-- Coursera credibility micro-badge -->
+        <a href="https://www.coursera.org/articles/learner-story-rahul-k" target="_blank" rel="noopener noreferrer"
+          class="hero-credibility-badge" aria-label="Read my Coursera Learner Story (opens in new tab)">
+          <span class="hcb-icon" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.4l-4.8 2.5.9-5.4L2.2 7.7l5.4-.8z" />
+            </svg>
+          </span>
+          <span class="hcb-text">Coursera Learner Story &mdash; Featured</span>
+          <span class="hcb-arrow" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7h8M8 4l3 3-3 3" />
+            </svg>
+          </span>
+        </a>
+      </div>
+      <div class="hero-visual fade-in-right">
+        <div class="soc-dashboard">
+          <div class="dash-header">
+            <div class="dash-title">
+              <div class="dash-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <span>Security Operations Center</span>
+            </div>
+            <div class="dash-status">
+              <span class="status-dot active"></span>
+              <span>Live</span>
+            </div>
+          </div>
+          <div class="dash-metrics">
+            <div class="dash-metric">
+              <span class="metric-val green">247</span>
+              <span class="metric-lbl">Events/hr</span>
+            </div>
+            <div class="dash-metric">
+              <span class="metric-val cyan">12</span>
+              <span class="metric-lbl">Open Alerts</span>
+            </div>
+            <div class="dash-metric">
+              <span class="metric-val orange">3</span>
+              <span class="metric-lbl">Critical</span>
+            </div>
+            <div class="dash-metric">
+              <span class="metric-val green">98.2%</span>
+              <span class="metric-lbl">Uptime</span>
+            </div>
+          </div>
+          <div class="dash-chart">
+            <div class="chart-label">Threat Activity &mdash; Last 24h</div>
+            <div class="chart-bars">
+              <div class="bar" style="--h:40%"></div>
+              <div class="bar" style="--h:65%"></div>
+              <div class="bar" style="--h:30%"></div>
+              <div class="bar" style="--h:80%"></div>
+              <div class="bar" style="--h:55%"></div>
+              <div class="bar" style="--h:90%"></div>
+              <div class="bar active" style="--h:70%"></div>
+              <div class="bar" style="--h:45%"></div>
+              <div class="bar" style="--h:60%"></div>
+              <div class="bar" style="--h:35%"></div>
+              <div class="bar" style="--h:75%"></div>
+              <div class="bar" style="--h:50%"></div>
+            </div>
+          </div>
+          <div class="dash-alerts">
+            <div class="alert-item high">
+              <span class="alert-sev">HIGH</span>
+              <span class="alert-name">Brute Force Detected &mdash; 192.168.1.45</span>
+              <span class="alert-time">2m ago</span>
+            </div>
+            <div class="alert-item medium">
+              <span class="alert-sev">MED</span>
+              <span class="alert-name">Unusual PowerShell Execution</span>
+              <span class="alert-time">8m ago</span>
+            </div>
+            <div class="alert-item low">
+              <span class="alert-sev">LOW</span>
+              <span class="alert-name">Geo Anomaly &mdash; Login from DE</span>
+              <span class="alert-time">15m ago</span>
+            </div>
+          </div>
+          <div class="dash-tools">
+            <span class="tool-tag">Sentinel</span>
+            <span class="tool-tag">Splunk</span>
+            <span class="tool-tag">KQL</span>
+            <span class="tool-tag">MITRE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">WHO I AM</span>
+        <h2 class="section-title">About Me</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-photo-col fade-in-left">
+          <div class="photo-frame">
+            <div class="photo-placeholder">
+              <picture>
+                <source srcset="assets/picture/IMG_20251003_221944.webp" type="image/webp" />
+                <img src="assets/picture/IMG_20251003_221944.webp" alt="Rahul K. Profile Picture" class="photo-img"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="photo-ring ring-1"></div>
+              <div class="photo-ring ring-2"></div>
+              <div class="photo-ring ring-3"></div>
+            </div>
+            <div class="photo-status">
+              <span class="status-dot active"></span>
+              <span>Available for hire</span>
+            </div>
+          </div>
+          <div class="about-social">
+            <a href="https://linkedin.com/in/rahulkram" target="_blank" class="social-pill linkedin"
+              aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/cyb-sehgal" target="_blank" class="social-pill github" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+        <div class="about-content-col fade-in-right">
+          <p class="about-intro">
+            Hello! I am Rahul, a cybersecurity professional focused on <strong>Security Operations Center</strong>
+            practices, SIEM
+            engineering, threat detection, incident investigation, and cloud security monitoring.
+          </p>
+          <p class="about-text">
+            My hands-on experience includes Microsoft Sentinel, Splunk, Snort IDS/IPS, Azure monitoring, Entra ID
+            security, threat intelligence integration, and SOC operations workflows. I enjoy transforming security
+            telemetry into actionable detections and helping organizations improve visibility into potential threats.
+          </p>
+          <div class="about-timeline">
+            <div class="timeline-item fade-in-up">
+              <div class="tl-dot"></div>
+              <div class="tl-content">
+                <div class="tl-year">2021 &ndash; 2025</div>
+                <div class="tl-title">B.Tech Computer Science & Engineering</div>
+                <div class="tl-sub">Academic Foundation in CS & Security</div>
+              </div>
+            </div>
+            <div class="timeline-item fade-in-up delay-1">
+              <div class="tl-dot"></div>
+              <div class="tl-content">
+                <div class="tl-year">2024 &ndash; 2025</div>
+                <div class="tl-title">Cyber Security Analyst Intern</div>
+                <div class="tl-sub">NIELIT Kolkata | Real SOC Operations</div>
+              </div>
+            </div>
+            <div class="timeline-item fade-in-up delay-2">
+              <div class="tl-dot"></div>
+              <div class="tl-content">
+                <div class="tl-year">Jan 2026 &ndash; May 2026</div>
+                <div class="tl-title">SOC Trainer</div>
+                <div class="tl-sub">NIELIT (Patna & EC Buxar) | I4C National Cybercrime Investigation Program</div>
+              </div>
+            </div>
+            <div class="timeline-item fade-in-up delay-3 future">
+              <div class="tl-dot future-dot"></div>
+              <div class="tl-content">
+                <div class="tl-year">Future Goal</div>
+                <div class="tl-title">Detection Engineer &middot; Threat Hunter &middot; SOC Analyst</div>
+                <div class="tl-sub">Building toward specialized threat detection roles</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Coursera Featured Recognition — embedded achievement -->
+      <div class="about-recognition fade-in-up delay-3">
+        <div class="recognition-card">
+          <div class="rec-orb rec-orb-1" aria-hidden="true"></div>
+          <div class="rec-orb rec-orb-2" aria-hidden="true"></div>
+          <div class="rec-top-row">
+            <span class="rec-badge">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="8" cy="8" r="6" />
+                <path d="M5 8l2 2 4-4" />
+              </svg>
+              Industry Recognition
+            </span>
+            <span class="rec-platform">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <rect x="2" y="3" width="16" height="12" rx="2" />
+                <path d="M8 19h4M10 15v4" />
+              </svg>
+              Coursera
+            </span>
+          </div>
+          <div class="rec-body">
+            <div class="rec-icon-col" aria-hidden="true">
+              <div class="rec-spotlight-ring">
+                <div class="rec-spotlight-inner">
+                  <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="24" cy="24" r="10" stroke-opacity="0.9" />
+                    <line x1="24" y1="4" x2="24" y2="10" />
+                    <line x1="24" y1="38" x2="24" y2="44" />
+                    <line x1="4" y1="24" x2="10" y2="24" />
+                    <line x1="38" y1="24" x2="44" y2="24" />
+                    <line x1="9.4" y1="9.4" x2="13.7" y2="13.7" />
+                    <line x1="34.3" y1="34.3" x2="38.6" y2="38.6" />
+                    <line x1="38.6" y1="9.4" x2="34.3" y2="13.7" />
+                    <line x1="13.7" y1="34.3" x2="9.4" y2="38.6" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="rec-text-col">
+              <div class="rec-outlet-label">Featured by</div>
+              <h3 class="rec-headline">Coursera</h3>
+              <p class="rec-subline">Learner Story — Official Publication</p>
+              <p class="rec-body-text">
+                My cybersecurity learning journey, career transition, and commitment to continuous
+                professional development were selected and published by Coursera as an official
+                Learner Story.
+              </p>
+              <div class="rec-divider" aria-hidden="true"></div>
+              <a href="https://www.coursera.org/articles/learner-story-rahul-k" target="_blank"
+                rel="noopener noreferrer" class="rec-cta"
+                aria-label="Read my Coursera Learner Story (opens in new tab)">
+                <span>Read My Story</span>
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M4 10h12M11 5l5 5-5 5" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== IMPACT METRICS ========== -->
+  <section class="section metrics" id="metrics">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">IMPACT</span>
+        <h2 class="section-title">By the Numbers</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-card fade-in-up">
+          <div class="metric-ring">
+            <svg class="ring-svg" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50" />
+              <circle class="ring-fill" cx="60" cy="60" r="50" data-percent="92" />
+            </svg>
+            <div class="metric-inner">
+              <span class="metric-number" data-target="150" data-suffix="+">0</span>
+            </div>
+          </div>
+          <div class="metric-info">
+            <h3 class="metric-title">Security Incidents Prevented</h3>
+            <p class="metric-desc">Active threat detection and mitigation through SIEM monitoring</p>
+          </div>
+        </div>
+        <div class="metric-card fade-in-up delay-1">
+          <div class="metric-ring">
+            <svg class="ring-svg" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50" />
+              <circle class="ring-fill cyan" cx="60" cy="60" r="50" data-percent="78" />
+            </svg>
+            <div class="metric-inner">
+              <span class="metric-number" data-target="100" data-suffix="+">0</span>
+            </div>
+          </div>
+          <div class="metric-info">
+            <h3 class="metric-title">Cybersecurity Sessions Delivered</h3>
+            <p class="metric-desc">Awareness training and security education sessions conducted</p>
+          </div>
+        </div>
+        <div class="metric-card fade-in-up delay-2">
+          <div class="metric-ring">
+            <svg class="ring-svg" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50" />
+              <circle class="ring-fill purple" cx="60" cy="60" r="50" data-percent="85" />
+            </svg>
+            <div class="metric-inner">
+              <span class="metric-number" data-target="130" data-suffix="+">0</span>
+            </div>
+          </div>
+          <div class="metric-info">
+            <h3 class="metric-title">Law Enforcement Personnel Trained</h3>
+            <p class="metric-desc">I4C National Cybercrime Investigation Program training</p>
+          </div>
+        </div>
+        <div class="metric-card fade-in-up delay-3">
+          <div class="metric-ring">
+            <svg class="ring-svg" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50" />
+              <circle class="ring-fill orange" cx="60" cy="60" r="50" data-percent="90" />
+            </svg>
+            <div class="metric-inner">
+              <span class="metric-number" data-target="90" data-suffix="%+">0</span>
+            </div>
+          </div>
+          <div class="metric-info">
+            <h3 class="metric-title">SLA Compliance Rate</h3>
+            <p class="metric-desc">Consistent on-time incident resolution and reporting</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EXPERIENCE SECTION ========== -->
+  <section class="section experience" id="experience">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">CAREER</span>
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="exp-timeline">
+        <div class="exp-item fade-in-up" id="exp1">
+          <div class="exp-dot-col">
+            <div class="exp-dot"></div>
+            <div class="exp-connector"></div>
+          </div>
+          <div class="exp-card">
+            <div class="exp-card-header">
+              <div class="exp-info">
+                <h3 class="exp-title">Cyber Security Analyst Intern</h3>
+                <div class="exp-company">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  </svg>
+                  NIELIT Kolkata
+                </div>
+              </div>
+              <div class="exp-meta">
+                <span class="exp-period">2024 &ndash; 2025</span>
+                <span class="exp-badge intern">Internship</span>
+              </div>
+            </div>
+            <ul class="exp-highlights">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Monitored Microsoft Sentinel and Snort IDS environments in active SOC workflows
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Performed alert triage and severity classification across security platforms
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Verified SIEM and EDR log ingestion pipelines for data completeness
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Contributed to the prevention of <strong>150+ security incidents</strong> through proactive monitoring
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Maintained SOC operational workflows and documentation
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Delivered cybersecurity awareness sessions for internal stakeholders
+              </li>
+            </ul>
+            <div class="exp-tech">
+              <span>Microsoft Sentinel</span><span>Snort</span><span>SIEM</span><span>Alert
+                Triage</span><span>KQL</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-item fade-in-up delay-2" id="exp2">
+          <div class="exp-dot-col">
+            <div class="exp-dot active"></div>
+          </div>
+          <div class="exp-card active-card">
+            <div class="exp-card-header">
+              <div class="exp-info">
+                <h3 class="exp-title">SOC Trainer</h3>
+                <div class="exp-company">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  </svg>
+                  NIELIT (Patna & EC Buxar) | I4C National Cybercrime Investigation Program
+                </div>
+              </div>
+              <div class="exp-meta">
+                <span class="exp-period">Jan 2026 &ndash; May 2026</span>
+                <span class="exp-badge completed">Completed</span>
+              </div>
+            </div>
+            <ul class="exp-highlights">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Trained <strong>130+ law enforcement personnel</strong> in cybercrime investigation techniques
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Developed SOC playbooks and standardized investigation procedures
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Created reporting workflows and escalation procedures
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Improved investigation efficiency by <strong>40%</strong> through optimized workflows
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Achieved <strong>90%+ SLA compliance rate</strong> across all training programs
+              </li>
+            </ul>
+            <div class="exp-tech">
+              <span>SOC Operations</span><span>Playbooks</span><span>Training</span><span>NIST</span><span>SLA
+                Management</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section training" id="training">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">NATIONAL IMPACT</span>
+        <h2 class="section-title">National Cybersecurity Training Experience</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="training-stats fade-in-up">
+        <div class="stat-card">
+          <div class="stat-glow green"></div>
+          <div class="stat-val-wrapper">
+            <span class="metric-number" data-target="100" data-suffix="+">0</span>
+          </div>
+          <p class="stat-lbl">Training Sessions Delivered</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-glow cyan"></div>
+          <div class="stat-val-wrapper">
+            <span class="metric-number" data-target="130" data-suffix="+">0</span>
+          </div>
+          <p class="stat-lbl">Law Enforcement Personnel Trained</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-glow purple"></div>
+          <div class="stat-val-wrapper">
+            <span class="stat-static-val">State &amp; National</span>
+          </div>
+          <p class="stat-lbl">Government Programs Delivered</p>
+        </div>
+      </div>
+
+      <div class="training-subsection army-training fade-in-up">
+        <div class="subsection-header">
+          <span class="subsection-badge">Defense Training Experience</span>
+          <h3 class="subsection-title">Cybersecurity Training for Indian Army Officers</h3>
+          <p class="subsection-desc">Delivered cybersecurity awareness and hands-on security training sessions for
+            Indian Army Officers covering cyber threats, network security, security operations, and digital defense
+            practices.</p>
+        </div>
+
+        <div class="army-gallery-grid">
+          <div class="gallery-item lightbox-trigger" data-image="assets/army-training/1729591109805.webp"
+            data-caption="Cybersecurity briefing for Indian Army Officers covering tactical network defense and threat landscapes."
+            role="button" tabindex="0" aria-label="View image: Indian Army Officers Cybersecurity Training - Session 1">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/army-training/1729591109805.webp" type="image/webp" />
+                <img src="assets/army-training/1729591109805.webp"
+                  alt="Indian Army Officers Cybersecurity Training - Session 1" loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-item lightbox-trigger" data-image="assets/army-training/1729591209081.webp"
+            data-caption="Hands-on workshop on incident response procedures and SOC monitoring for military command teams."
+            role="button" tabindex="0" aria-label="View image: Defense Forces Security Operations Lab">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/army-training/1729591209081.webp" type="image/webp" />
+                <img src="assets/army-training/1729591209081.webp" alt="Defense Forces Security Operations Lab"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-item lightbox-trigger" data-image="assets/army-training/1729591310654.webp"
+            data-caption="Hands-on workshop on incident response procedures and SOC monitoring for military command teams."
+            role="button" tabindex="0" aria-label="View image: Army Officers Cybersecurity Lecture">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/army-training/1729591310654.webp" type="image/webp" />
+                <img src="assets/army-training/1729591310654.webp" alt="Army Officers Cybersecurity Lecture"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-item lightbox-trigger" data-image="assets/army-training/1729591427567.webp"
+            data-caption="Interactive presentation focusing on secure communication infrastructure and cyber threats."
+            role="button" tabindex="0" aria-label="View image: Tactical Defense Network Training">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/army-training/1729591427567.webp" type="image/webp" />
+                <img src="assets/army-training/1729591427567.webp" alt="Tactical Defense Network Training"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- State Police Subsection -->
+      <div class="training-subsection police-training fade-in-up">
+        <div class="subsection-header">
+          <span class="subsection-badge">Law Enforcement Training Experience</span>
+          <h3 class="subsection-title">Cybercrime Investigation &amp; SOC Training</h3>
+          <p class="subsection-desc">Delivered cybersecurity, SOC operations, threat detection, OSINT, network
+            forensics, and cybercrime investigation training programs for state police personnel under
+            government-sponsored initiatives.</p>
+        </div>
+
+        <div class="police-masonry">
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG-20260119-WA0006.webp"
+            data-caption="State police officers undergoing specialized cybersecurity training." role="button"
+            tabindex="0" aria-label="View image: Police Cybercrime Investigation Training">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG-20260119-WA0006.webp" type="image/webp" />
+                <img src="assets/police-training/IMG-20260119-WA0006.webp"
+                  alt="Police Cybercrime Investigation Training" loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG-20260120-WA0006.webp"
+            data-caption="Hands-on cyber forensics training lab for State police officers." role="button" tabindex="0"
+            aria-label="View image: Law Enforcement Cyber Training">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG-20260120-WA0006.webp" type="image/webp" />
+                <img src="assets/police-training/IMG-20260120-WA0006.webp" alt="Law Enforcement Cyber Training"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG-20260218-WA0007.webp"
+            data-caption="Cybersecurity awareness and threat vectors analysis session for officers." role="button"
+            tabindex="0" aria-label="View image: OSINT and Forensics Workshop">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG-20260218-WA0007.webp" type="image/webp" />
+                <img src="assets/police-training/IMG-20260218-WA0007.webp" alt="OSINT and Forensics Workshop"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG-20260218-WA0008.webp"
+            data-caption="Real-World Case studies on Recon & Enumeration for digital defense." role="button" tabindex="0"
+            aria-label="View image: Police Threat Intelligence Briefing">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG-20260218-WA0008.webp" type="image/webp" />
+                <img src="assets/police-training/IMG-20260218-WA0008.webp" alt="Police Threat Intelligence Briefing"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG-20260227-WA0050.webp"
+            data-caption="Presenting training resources and program materials during the closing ceremony of the Training Program" role="button"
+            tabindex="0" aria-label="View image: SOC Analyst Training for Police">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG-20260227-WA0050.webp" type="image/webp" />
+                <img src="assets/police-training/IMG-20260227-WA0050.webp" alt="SOC Analyst Training for Police"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG-20260227-WA0365.webp"
+            data-caption="Received a token of Appreciation from Joint Director Bhaskar Banerjee (NIELIT Patna), for delivering Cyber Security & Digital Forensics training to LEAs under the I4C National Program." role="button"
+            tabindex="0" aria-label="View image: Police Officers Forensics Class">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG-20260227-WA0365.webp" type="image/webp" />
+                <img src="assets/police-training/IMG-20260227-WA0365.webp" alt="Police Officers Forensics Class"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG-20260227-WA0373.webp"
+            data-caption="Certificate of Appreciation from Joint Director Bhaskar Banerjee (NIELIT Patna), for delivering Cyber Security & Digital Forensics training to LEAs under the I4C National Program." role="button"
+            tabindex="0" aria-label="View image: Law Enforcement Cybercrime Program">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG-20260227-WA0373.webp" type="image/webp" />
+                <img src="assets/police-training/IMG-20260227-WA0373.webp" alt="Law Enforcement Cybercrime Program"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG_20260131_205800.webp"
+            data-caption="Group photograph following a cybersecurity training program delivered to police officials under a law enforcement capacity-building initiative" role="button"
+            tabindex="0" aria-label="View image: Joint Agency Training Event">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG_20260131_205800.webp" type="image/webp" />
+                <img src="assets/police-training/IMG_20260131_205800.webp" alt="Joint Agency Training Event"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG_20260301_232021.webp"
+            data-caption="Presenting course completion certificates to officers following successful participation in the training program." role="button" tabindex="0"
+            aria-label="View image: SOC Training Lab Session">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG_20260301_232021.webp" type="image/webp" />
+                <img src="assets/police-training/IMG_20260301_232021.webp" alt="SOC Training Lab Session" loading="lazy"
+                  decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG_20260301_232101.webp"
+            data-caption="Presenting course completion certificates to officers following successful participation in the training program." role="button"
+            tabindex="0" aria-label="View image: OSINT Training for Police">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG_20260301_232101.webp" type="image/webp" />
+                <img src="assets/police-training/IMG_20260301_232101.webp" alt="OSINT Training for Police"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG_20260301_232115.webp"
+            data-caption="Presenting course completion certificates to officers following successful participation in the training program." role="button"
+            tabindex="0" aria-label="View image: Incident Response Training Police">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG_20260301_232115.webp" type="image/webp" />
+                <img src="assets/police-training/IMG_20260301_232115.webp" alt="Incident Response Training Police"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG_20260301_232136.webp"
+            data-caption="Presenting course completion certificates to officers following successful participation in the training program." role="button"
+            tabindex="0" aria-label="View image: Cybercrime Dashboard Monitoring">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG_20260301_232136.webp" type="image/webp" />
+                <img src="assets/police-training/IMG_20260301_232136.webp" alt="Cybercrime Dashboard Monitoring"
+                  loading="lazy" decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="masonry-item lightbox-trigger" data-image="assets/police-training/IMG_7405.webp"
+            data-caption="Group photograph following a cybersecurity training program delivered to police officials under a law enforcement capacity-building initiative." role="button"
+            tabindex="0" aria-label="View image: Advanced Digital Forensics Training">
+            <div class="gallery-img-wrapper">
+              <picture>
+                <source srcset="assets/police-training/IMG_7405.webp" type="image/webp" />
+                <img src="assets/police-training/IMG_7405.webp" alt="Advanced Digital Forensics Training" loading="lazy"
+                  decoding="async" />
+              </picture>
+              <div class="gallery-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                  <span class="overlay-text">View Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS SECTION ========== -->
+  <section class="section projects" id="projects">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">PORTFOLIO</span>
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="section-line"></div>
+        <div class="project-filters">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="siem">SIEM</button>
+          <button class="filter-btn" data-filter="ids">IDS/IPS</button>
+          <button class="filter-btn" data-filter="cloud">Cloud</button>
+        </div>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card fade-in-up" data-category="siem cloud" id="proj1">
+          <div class="proj-header">
+            <div class="proj-num">01</div>
+            <div class="proj-badges">
+              <span class="proj-badge featured">Featured</span>
+              <span class="proj-badge siem-badge">SIEM</span>
+            </div>
+          </div>
+          <div class="proj-icon-area sentinel-bg">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M32 6L10 18v14c0 13 9.5 24.5 22 28 12.5-3.5 22-15 22-28V18L32 6z" />
+              <path d="M24 32l5 5 11-11" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <h3 class="proj-title">Microsoft Sentinel SIEM Lab</h3>
+          <p class="proj-desc">Built a complete Microsoft Sentinel environment including Resource Groups, Log Analytics
+            Workspace, Sentinel Workspace, RBAC controls, Content Hub integrations, DCR configuration, Threat
+            Intelligence feeds, and custom KQL detection rules.</p>
+          <div class="proj-tech">
+            <span>Azure</span><span>Microsoft Sentinel</span><span>KQL</span><span>Entra ID</span><span>DCR</span>
+          </div>
+          <div class="proj-actions">
+            <a href="https://github.com/cyb-sehgal/Microsoft-Sentinel-SIEM" target="_blank" class="proj-btn primary">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+        <div class="project-card fade-in-up delay-1" data-category="siem" id="proj2">
+          <div class="proj-header">
+            <div class="proj-num">02</div>
+            <div class="proj-badges">
+              <span class="proj-badge siem-badge">SIEM</span>
+            </div>
+          </div>
+          <div class="proj-icon-area splunk-bg">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="8 40 18 24 28 36 38 16 48 28 58 20" />
+              <circle cx="8" cy="40" r="3" />
+              <circle cx="58" cy="20" r="3" />
+            </svg>
+          </div>
+          <h3 class="proj-title">Custom SIEM Platform</h3>
+          <p class="proj-desc">Architected a Splunk-based SIEM platform supporting log ingestion, event correlation, SOC
+            dashboards, ticketing integration, and automated alert escalation workflows.</p>
+          <div class="proj-tech">
+            <span>Splunk</span><span>Python</span><span>Automation</span><span>Log Correlation</span><span>SPL</span>
+          </div>
+          <div class="proj-actions">
+            <a href="https://github.com/cyb-sehgal/SIEM-Tool" target="_blank" class="proj-btn primary">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+        <div class="project-card fade-in-up delay-2" data-category="ids" id="proj3">
+          <div class="proj-header">
+            <div class="proj-num">03</div>
+            <div class="proj-badges">
+              <span class="proj-badge ids-badge">IDS/IPS</span>
+            </div>
+          </div>
+          <div class="proj-icon-area snort-bg">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M32 4L8 16v16c0 14 10 26 24 30 14-4 24-16 24-30V16L32 4z" />
+              <path d="M20 32l12-12 12 12" />
+              <line x1="32" y1="20" x2="32" y2="44" />
+            </svg>
+          </div>
+          <h3 class="proj-title">Network Intrusion Detection System</h3>
+          <p class="proj-desc">Implemented a production-grade Snort NIDS with custom detection rules, network monitoring
+            workflows, suppression tuning, and automated alert generation for real-time threat detection.</p>
+          <div class="proj-tech">
+            <span>Snort</span><span>Linux</span><span>Networking</span><span>IDS/IPS</span><span>Custom Rules</span>
+          </div>
+          <div class="proj-actions">
+            <a href="https://github.com/cyb-sehgal/NIDS" target="_blank" class="proj-btn primary">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SKILLS / COMPETENCIES SECTION ========== -->
+  <section class="section competencies" id="skills">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">EXPERTISE</span>
+        <h2 class="section-title">Core Security Competencies</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="comp-grid">
+        <div class="comp-card fade-in-up">
+          <div class="comp-icon threat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </div>
+          <h3 class="comp-title">Threat Detection</h3>
+          <p class="comp-desc">Developing detection rules, validating alerts, identifying suspicious activity, and
+            improving detection coverage across the enterprise.</p>
+          <div class="comp-tags">
+            <span>MITRE ATT&CK</span><span>KQL</span><span>SIGMA</span>
+          </div>
+        </div>
+        <div class="comp-card fade-in-up delay-1">
+          <div class="comp-icon siem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </div>
+          <h3 class="comp-title">SIEM Engineering</h3>
+          <p class="comp-desc">Building Microsoft Sentinel and Splunk environments, integrating data sources, creating
+            analytics rules, and managing log pipelines.</p>
+          <div class="comp-tags">
+            <span>Sentinel</span><span>Splunk</span><span>QRadar</span>
+          </div>
+        </div>
+        <div class="comp-card fade-in-up delay-2">
+          <div class="comp-icon ir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </div>
+          <h3 class="comp-title">Incident Response</h3>
+          <p class="comp-desc">Alert triage, investigation, classification, containment support, and escalation
+            procedures following structured SOC playbooks.</p>
+          <div class="comp-tags">
+            <span>Playbooks</span><span>Triage</span><span>NIST</span>
+          </div>
+        </div>
+        <div class="comp-card fade-in-up delay-3">
+          <div class="comp-icon cloud">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+            </svg>
+          </div>
+          <h3 class="comp-title">Cloud Security</h3>
+          <p class="comp-desc">Azure monitoring, Entra ID security, RBAC administration, IAM controls, and identity
+            protection across cloud environments.</p>
+          <div class="comp-tags">
+            <span>Azure</span><span>Entra ID</span><span>RBAC</span>
+          </div>
+        </div>
+        <div class="comp-card fade-in-up delay-4">
+          <div class="comp-icon ti">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </div>
+          <h3 class="comp-title">Threat Intelligence</h3>
+          <p class="comp-desc">IOC ingestion, enrichment, threat feeds, intelligence correlation, and security analytics
+            for proactive defense.</p>
+          <div class="comp-tags">
+            <span>IOC</span><span>TI Feeds</span><span>STIX/TAXII</span>
+          </div>
+        </div>
+        <div class="comp-card fade-in-up delay-5">
+          <div class="comp-icon auto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
+          </div>
+          <h3 class="comp-title">Security Automation</h3>
+          <p class="comp-desc">Python, PowerShell, KQL, workflow automation, and security operations optimization for
+            faster detection and response.</p>
+          <div class="comp-tags">
+            <span>Python</span><span>PowerShell</span><span>KQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECURITY ARSENAL ========== -->
+  <section class="section arsenal" id="arsenal">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">TOOLS & TECHNOLOGIES</span>
+        <h2 class="section-title">Security Arsenal</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="arsenal-grid fade-in-up">
+        <div class="arsenal-category">
+          <h3 class="cat-title">SIEM & Monitoring</h3>
+          <div class="tool-badges">
+            <div class="tool-badge" data-tool="Microsoft Sentinel">
+              <div class="tool-icon sentinel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <span>Microsoft Sentinel</span>
+            </div>
+            <div class="tool-badge" data-tool="Splunk">
+              <div class="tool-icon splunk">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+              </div>
+              <span>Splunk</span>
+            </div>
+            <div class="tool-badge" data-tool="QRadar">
+              <div class="tool-icon qradar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="2" width="20" height="20" rx="2" />
+                  <path d="M8 12h8M12 8v8" />
+                </svg>
+              </div>
+              <span>QRadar</span>
+            </div>
+          </div>
+        </div>
+        <div class="arsenal-category">
+          <h3 class="cat-title">Security Tools</h3>
+          <div class="tool-badges">
+            <div class="tool-badge" data-tool="Snort IDS/IPS">
+              <div class="tool-icon snort">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+              </div>
+              <span>Snort IDS/IPS</span>
+            </div>
+            <div class="tool-badge" data-tool="Microsoft Defender">
+              <div class="tool-icon defender">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="M9 12l2 2 4-4" />
+                </svg>
+              </div>
+              <span>MS Defender</span>
+            </div>
+            <div class="tool-badge" data-tool="CrowdStrike">
+              <div class="tool-icon crowdstrike">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+              </div>
+              <span>CrowdStrike</span>
+            </div>
+          </div>
+        </div>
+        <div class="arsenal-category">
+          <h3 class="cat-title">Cloud & Identity</h3>
+          <div class="tool-badges">
+            <div class="tool-badge" data-tool="Azure">
+              <div class="tool-icon azure">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+                </svg>
+              </div>
+              <span>Azure</span>
+            </div>
+            <div class="tool-badge" data-tool="Entra ID">
+              <div class="tool-icon entraid">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+              <span>Entra ID</span>
+            </div>
+          </div>
+        </div>
+        <div class="arsenal-category">
+          <h3 class="cat-title">Languages & Query</h3>
+          <div class="tool-badges">
+            <div class="tool-badge" data-tool="Python">
+              <div class="tool-icon python">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                </svg>
+              </div>
+              <span>Python</span>
+            </div>
+            <div class="tool-badge" data-tool="PowerShell">
+              <div class="tool-icon powershell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="3" width="20" height="14" rx="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+              </div>
+              <span>PowerShell</span>
+            </div>
+            <div class="tool-badge" data-tool="Bash">
+              <div class="tool-icon bash">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="4 17 10 11 4 5" />
+                  <line x1="12" y1="19" x2="20" y2="19" />
+                </svg>
+              </div>
+              <span>Bash</span>
+            </div>
+            <div class="tool-badge" data-tool="KQL">
+              <div class="tool-icon kql">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+              </div>
+              <span>KQL</span>
+            </div>
+          </div>
+        </div>
+        <div class="arsenal-category">
+          <h3 class="cat-title">Frameworks</h3>
+          <div class="tool-badges">
+            <div class="tool-badge" data-tool="MITRE ATT&CK">
+              <div class="tool-icon mitre">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              </div>
+              <span>MITRE ATT&amp;CK</span>
+            </div>
+            <div class="tool-badge" data-tool="NIST">
+              <div class="tool-icon nist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+              </div>
+              <span>NIST</span>
+            </div>
+            <div class="tool-badge" data-tool="OWASP">
+              <div class="tool-icon owasp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                  <line x1="12" y1="9" x2="12" y2="13" />
+                  <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+              </div>
+              <span>OWASP</span>
+            </div>
+          </div>
+        </div>
+        <div class="arsenal-category">
+          <h3 class="cat-title">Offensive &amp; Analysis</h3>
+          <div class="tool-badges">
+            <div class="tool-badge" data-tool="Kali Linux">
+              <div class="tool-icon kalilinux">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/>
+                  <polyline points="4 7 8 11 4 15" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="12" y1="15" x2="20" y2="15" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span>Kali Linux</span>
+            </div>
+            <div class="tool-badge" data-tool="Metasploit">
+              <div class="tool-icon metasploit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 2l2.5 7.5H22l-6.5 4.5 2.5 7.5L12 17l-6 4.5 2.5-7.5L2 9.5h7.5z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span>Metasploit</span>
+            </div>
+            <div class="tool-badge" data-tool="Wireshark">
+              <div class="tool-icon wireshark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="2 12 5 5 8 15 11 8 14 18 17 9 20 12 22 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span>Wireshark</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section certs" id="certifications">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">CREDENTIALS</span>
+        <h2 class="section-title">Certifications</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="certs-grid">
+
+        <!-- CERT 1: Microsoft Sentinel -->
+        <div class="cert-card fade-in-up" id="cert1">
+          <div class="cert-logo microsoft" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-name">Microsoft Sentinel</h3>
+            <span class="cert-issuer">Microsoft</span>
+            <div class="cert-skills">
+              <span>Sentinel</span><span>KQL</span><span>Azure</span>
+            </div>
+          </div>
+          <a href="https://www.udemy.com/certificate/UC-855b0f70-6522-4845-9f4a-61bcfe8e8e7c/" class="cert-verify"
+            target="_blank" rel="noopener noreferrer"
+            aria-label="Verify Microsoft Sentinel certificate (opens in new tab)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="9 11 12 14 22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
+            Verify
+          </a>
+        </div>
+
+        <!-- CERT 2: Google Cybersecurity Professional -->
+        <div class="cert-card fade-in-up delay-1" id="cert2">
+          <div class="cert-logo google" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10" />
+              <path
+                d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32" />
+            </svg>
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-name">Google Cybersecurity Professional</h3>
+            <span class="cert-issuer">Google / Coursera</span>
+            <div class="cert-skills">
+              <span>SOC</span><span>Security+</span><span>Detection</span>
+            </div>
+          </div>
+          <a href="https://coursera.org/share/b90279d08a9a43204239362ee2790ab8" class="cert-verify" target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Verify Google Cybersecurity Professional certificate (opens in new tab)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="9 11 12 14 22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
+            Verify
+          </a>
+        </div>
+
+        <!-- CERT 3: Secure Access with Azure AD -->
+        <div class="cert-card fade-in-up delay-2" id="cert3">
+          <div class="cert-logo azure" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+            </svg>
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-name">Secure Access with Azure AD</h3>
+            <span class="cert-issuer">Microsoft</span>
+            <div class="cert-skills">
+              <span>Entra ID</span><span>RBAC</span><span>IAM</span>
+            </div>
+          </div>
+          <a href="https://coursera.org/share/d55950fb8fcb0d3756416af499318496" class="cert-verify" target="_blank"
+            rel="noopener noreferrer" aria-label="Verify Secure Access with Azure AD certificate (opens in new tab)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="9 11 12 14 22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
+            Verify
+          </a>
+        </div>
+
+        <!-- CERT 4: Ethical Hacking Essentials -->
+        <div class="cert-card fade-in-up delay-3" id="cert4">
+          <div class="cert-logo ehe" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-name">Ethical Hacking Essentials</h3>
+            <span class="cert-issuer">EC-Council</span>
+            <div class="cert-skills">
+              <span>Pentesting</span><span>Recon</span><span>Exploitation</span>
+            </div>
+          </div>
+          <a href="https://learn.eccouncil.org/certificate/bc68d1e6-c907-4511-b7d2-c2066cfdef7e?logged=true"
+            class="cert-verify" target="_blank" rel="noopener noreferrer"
+            aria-label="Verify Ethical Hacking Essentials certificate (opens in new tab)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="9 11 12 14 22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
+            Verify
+          </a>
+        </div>
+
+        <!-- CERT 5: Network Defense Essentials -->
+        <div class="cert-card fade-in-up delay-4" id="cert5">
+          <div class="cert-logo nde" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+            </svg>
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-name">Network Defense Essentials</h3>
+            <span class="cert-issuer">EC-Council</span>
+            <div class="cert-skills">
+              <span>Networking</span><span>Firewall</span><span>IDS/IPS</span>
+            </div>
+          </div>
+          <a href="https://learn.eccouncil.org/certificate/908d2432-8047-4dc7-bed6-b42357da09ca?logged=true"
+            class="cert-verify" target="_blank" rel="noopener noreferrer"
+            aria-label="Verify Network Defense Essentials certificate (opens in new tab)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="9 11 12 14 22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
+            Verify
+          </a>
+        </div>
+
+        <!-- CERT 6: Digital Forensics Essentials -->
+        <div class="cert-card fade-in-up delay-5" id="cert6">
+          <div class="cert-logo dfe" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              <line x1="9" y1="10" x2="15" y2="10" />
+              <line x1="9" y1="14" x2="13" y2="14" />
+            </svg>
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-name">Digital Forensics Essentials</h3>
+            <span class="cert-issuer">EC-Council</span>
+            <div class="cert-skills">
+              <span>Digital Forensics</span><span>Evidence Analysis</span><span>Investigation</span>
+            </div>
+          </div>
+          <a href="https://learn.eccouncil.org/certificate/a3369569-a1dc-4555-8317-c035aba7fcbc?logged=true"
+            class="cert-verify" target="_blank" rel="noopener noreferrer"
+            aria-label="Verify Digital Forensics Essentials certificate (opens in new tab)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="9 11 12 14 22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
+            Verify
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RECRUITER SECTION ========== -->
+  <section class="section recruiter" id="recruiter">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">FOR HIRING MANAGERS</span>
+        <h2 class="section-title">Why Contact Me?</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="recruiter-grid">
+        <div class="rec-card fade-in-up" id="rec1">
+          <div class="rec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </div>
+          <h3>Hands-On SIEM Experience</h3>
+          <p>Not just theoretical — I have built, configured, and operated Microsoft Sentinel and Splunk environments in
+            real security operations contexts.</p>
+        </div>
+        <div class="rec-card fade-in-up delay-1" id="rec2">
+          <div class="rec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <h3>Real Security Operations Exposure</h3>
+          <p>Gained practical SOC experience through a formal internship at NIELIT, contributing to active threat
+            monitoring and incident prevention.</p>
+        </div>
+        <div class="rec-card fade-in-up delay-2" id="rec3">
+          <div class="rec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+            </svg>
+          </div>
+          <h3>Microsoft Sentinel & Splunk</h3>
+          <p>Proficient in both leading SIEM platforms, including workspace setup, analytics rules, KQL queries, and
+            integration architecture.</p>
+        </div>
+        <div class="rec-card fade-in-up delay-3" id="rec4">
+          <div class="rec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </div>
+          <h3>Threat Detection Mindset</h3>
+          <p>Approach security analytically — focused on detecting behavioral anomalies, building detection logic, and
+            improving security visibility.</p>
+        </div>
+        <div class="rec-card fade-in-up delay-4" id="rec5">
+          <div class="rec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <h3>Training & Communication Skills</h3>
+          <p>Delivered 100+ cybersecurity sessions and trained 130+ law enforcement officers — strong communicator
+            capable of bridging technical and non-technical audiences.</p>
+        </div>
+        <div class="rec-card fade-in-up delay-5" id="rec6">
+          <div class="rec-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <h3>Continuous Learning</h3>
+          <p>Actively pursuing certifications, building lab environments, and staying current with threat intelligence
+            to continuously grow my detection engineering capabilities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <span class="section-label">GET IN TOUCH</span>
+        <h2 class="section-title">Contact Me</h2>
+        <div class="section-line"></div>
+        <p class="section-desc">Have an opportunity, want to collaborate, or just want to talk cybersecurity? I'd love
+          to hear from you.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info fade-in-left">
+          <div class="contact-card" id="ctLinkedIn">
+            <div class="contact-icon linkedin-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </div>
+            <div>
+              <a href="https://linkedin.com/in/rahulkram" target="_blank" class="ct-value">Connect with me on
+                LinkedIn</a>
+            </div>
+          </div>
+          <div class="contact-card" id="ctGitHub">
+            <div class="contact-icon github-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+            </div>
+            <div>
+              <a href="https://github.com/cyb-sehgal" target="_blank" class="ct-value">GitHub</a>
+            </div>
+          </div>
+          <div class="contact-card" id="ctEmail">
+            <div class="contact-icon email-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
+            <div>
+              <a href="mailto:contact_rahul@yahoo.com" class="ct-value">Send an Email</a>
+            </div>
+          </div>
+          <a href="assets/resume.pdf" download class="resume-download-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Resume
+          </a>
+        </div>
+        <div class="contact-form-col fade-in-right">
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/xlgkjoor" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="New Portfolio Contact — Rahul K." />
+            <div class="form-group">
+              <label for="formName">Full Name</label>
+              <input type="text" id="formName" name="name" placeholder="John Smith" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="formEmail">Email Address</label>
+              <input type="email" id="formEmail" name="email" placeholder="john@company.com" required
+                autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="formSubject">Subject</label>
+              <input type="text" id="formSubject" name="subject" placeholder="SOC Analyst Opportunity" required
+                autocomplete="off" />
+            </div>
+            <div class="form-group">
+              <label for="formMessage">Message</label>
+              <textarea id="formMessage" name="message" rows="5"
+                placeholder="Tell me about the opportunity or what you'd like to discuss..." required
+                autocomplete="off"></textarea>
+            </div>
+            <button type="submit" class="btn-primary form-submit" id="submitBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+              Send Message
+            </button>
+            <div class="form-success" id="formSuccess">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Message sent! I'll get back to you soon.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-motto">
+          <span class="motto-word">DETECT</span>
+          <span class="motto-sep">&middot;</span>
+          <span class="motto-word">INVESTIGATE</span>
+          <span class="motto-sep">&middot;</span>
+          <span class="motto-word">RESPOND</span>
+        </div>
+        <h3 class="footer-name">Rahul K.</h3>
+        <p class="footer-role">SOC Analyst | SIEM Engineer</p>
+        <p class="footer-built">Built with Security in Mind</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-nav">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#certifications">Certifications</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://github.com/cyb-sehgal" target="_blank" aria-label="GitHub" class="footer-social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+          </a>
+          <a href="https://linkedin.com/in/rahulkram" target="_blank" aria-label="LinkedIn" class="footer-social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a>
+          <a href="mailto:contact_rahul@yahoo.com" aria-label="Email" class="footer-social-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Rahul. All rights reserved.</p>
+      <p class="footer-tech">Designed & Built with ❤️ for the Security Community</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-label="Image viewer">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+    <div class="lightbox-content">
+      <img src="" alt="" id="lightboxImg" />
+      <div class="lightbox-caption-bar">
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+        <span class="lightbox-counter" id="lightboxCounter"></span>
+      </div>
+    </div>
   </div>
-</nav>
 
-<div class="container">
-
-  <header class="hero">
-    <div class="hero-tag">cybersecurity analyst // soc operations</div>
-    <h1>RAHUL<br><em>K.</em></h1>
-    <p class="hero-sub">
-      SOC analyst specializing in <span class="highlight">SIEM operations</span>,
-      <span class="highlight">threat detection</span>, and <span class="highlight">incident response</span>.
-      Experienced with Microsoft Sentinel, Splunk, QRadar — trained <span class="highlight">170+ security and law enforcement professionals</span> in cybercrime investigation techniques.
-    </p>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Incidents Prevented</div></div>
-      <div class="stat"><div class="stat-num">170+</div><div class="stat-label">Professionals Trained</div></div>
-      <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Days Army Training</div></div>
-      <div class="stat"><div class="stat-num">90%+</div><div class="stat-label">SLA Rate</div></div>
-    </div>
-    <div class="hero-ctas">
-      <a href="https://linkedin.com/in/rahulkram" class="btn btn-primary">&#128279; LinkedIn</a>
-      <a href="https://github.com/cyb-sehgal" class="btn btn-outline">&#128008; GitHub</a>
-    </div>
-  </header>
-
-  <section id="about">
-    <div class="sec-label">01 // whoami</div>
-    <div class="sec-title">About</div>
-    <div class="terminal">
-      <div class="terminal-bar">
-        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
-        <div class="terminal-title">bash — rahul@soc-terminal</div>
-      </div>
-      <div class="terminal-body">
-        <div><span class="t-prompt">rahul@soc</span>:<span style="color:var(--blue)">~</span>$ <span class="t-cmd">cat analyst_profile.json</span></div>
-        <div class="t-out">{</div>
-        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"name"</span>: <span class="t-str">"Rahul K"</span>,</div>
-        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-str">"Cybersecurity Analyst"</span>,</div>
-        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-str">"Bihar, India"</span>,</div>
-        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"education"</span>: <span class="t-str">"B.Tech CSE — All Saints' College of Technology, Bhopal (2021–2025)"</span>,</div>
-        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"focus_areas"</span>: [<span class="t-str">"SOC Operations"</span>, <span class="t-str">"SIEM Monitoring"</span>, <span class="t-str">"Threat Detection"</span>, <span class="t-str">"Incident Response"</span>, <span class="t-str">"IAM"</span>],</div>
-        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"scripting"</span>: [<span class="t-str">"Python"</span>, <span class="t-str">"PowerShell"</span>, <span class="t-str">"Bash"</span>],</div>
-        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"status"</span>: <span style="color:var(--teal-bright)">"Open to opportunities"</span></div>
-        <div class="t-out">}</div>
-        <br>
-        <div><span class="t-prompt">rahul@soc</span>:<span style="color:var(--blue)">~</span>$ <span class="blink"></span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience">
-    <div class="sec-label">02 // experience.log</div>
-    <div class="sec-title">Experience</div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-dot active"></div>
-        <div class="tl-date">JAN 2026 – MAY 2026</div>
-        <div class="tl-title">SOC Trainer — Cyber Security & Ethical Hacking</div>
-        <div class="tl-org">I4C-Sponsored National Cybercrime Investigation Program · Bihar</div>
-        <ul class="tl-bullets">
-          <li>Designed and delivered SOC-aligned incident response training to <span class="tl-metric">130+ law enforcement personnel</span> covering threat detection, OSINT, CDR/IPDR analysis, and network forensics</li>
-          <li>Developed structured security runbooks and training documentation that improved case-handling efficiency by <span class="tl-metric">~65%</span> and reduced investigation turnaround by <span class="tl-metric">~40%</span></li>
-          <li>Maintained <span class="tl-metric">90%+</span> SLA completion rate throughout the engagement</li>
-        </ul>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-date">AUG 2024 – SEP 2025</div>
-        <div class="tl-title">Cyber Security Analyst (Intern)</div>
-        <div class="tl-org">National Institute of Electronics & Information Technology (NIELIT) · West Bengal</div>
-        <ul class="tl-bullets">
-          <li>Monitored and analyzed security events in <span class="tl-metric">Microsoft Sentinel</span> and Snort IDS/IPS; performed real-time threat detection, alert triage, and incident escalation within the SOC</li>
-          <li>Contributed to prevention of <span class="tl-metric">15+ security incidents</span> through proactive monitoring</li>
-          <li>Delivered a <span class="tl-metric">20+ day cybersecurity training program</span> for <span class="tl-metric">40+ Indian Army personnel</span> at AEC (Army Education Corps), Pachmarhi, covering security operations, cybercrime investigation, ethical hacking, and defensive security practices</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="sec-label">03 // /projects</div>
-    <div class="sec-title">Projects</div>
-    <div class="projects-grid">
-      <div class="proj-card">
-        <div class="proj-header"><div class="proj-icon">🛡️</div><div class="proj-badge">ACTIVE</div></div>
-        <div class="proj-title">Microsoft Sentinel Lab</div>
-        <div class="proj-desc">End-to-end Azure Sentinel environment with RBAC, Entra ID log ingestion, threat intelligence feeds, and custom detection rules for high-priority alert surfacing.</div>
-        <div class="proj-tags"><span class="tag">Azure Sentinel</span><span class="tag">Entra ID</span><span class="tag">RBAC</span><span class="tag">KQL</span><span class="tag">Threat Intel</span></div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-header"><div class="proj-icon">📊</div><div class="proj-badge">2024</div></div>
-        <div class="proj-title">Custom SIEM Platform</div>
-        <div class="proj-desc">Splunk-based SIEM for real-time log ingestion, event correlation, and automated alert escalation. Implements detection rules mirroring SOC workflows with ticketing integration.</div>
-        <div class="proj-tags"><span class="tag">Splunk</span><span class="tag">Log Correlation</span><span class="tag">Alert Automation</span><span class="tag">SOC Workflows</span></div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-header"><div class="proj-icon">🔍</div><div class="proj-badge">2024</div></div>
-        <div class="proj-title">Network Intrusion Detection</div>
-        <div class="proj-desc">Production-grade Snort NIDS with custom threat detection rules, automated security alarm generation, false-positive noise reduction, and structured alert logs.</div>
-        <div class="proj-tags"><span class="tag">Snort</span><span class="tag">IDS/IPS</span><span class="tag">Custom Rules</span><span class="tag">Network Security</span></div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-header"><div class="proj-icon">🚩</div><div class="proj-badge">ONGOING</div></div>
-        <div class="proj-title">CTF & Threat Simulation</div>
-        <div class="proj-desc">TryHackMe challenges mapped to MITRE ATT&CK TTPs — covering endpoint forensics, lateral movement, privilege escalation, and network exploitation in real-world SOC scenarios.</div>
-        <div class="proj-tags"><span class="tag">TryHackMe</span><span class="tag">MITRE ATT&CK</span><span class="tag">Forensics</span><span class="tag">Pen Testing</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="sec-label">04 // skills.map()</div>
-    <div class="sec-title">Technical Skills</div>
-    <div class="skills-grid">
-      <div class="skill-cat">
-        <div class="skill-cat-title">Azure & Cloud</div>
-        <div class="skill-list"><span class="skill-pill">Microsoft Sentinel</span><span class="skill-pill">Azure RBAC</span><span class="skill-pill">Entra ID</span><span class="skill-pill">Log Analytics</span><span class="skill-pill">IAM</span><span class="skill-pill">MFA</span><span class="skill-pill">DCRs</span></div>
-      </div>
-      <div class="skill-cat">
-        <div class="skill-cat-title">SIEM & SOC</div>
-        <div class="skill-list"><span class="skill-pill">Splunk</span><span class="skill-pill">QRadar</span><span class="skill-pill">Snort IDS/IPS</span><span class="skill-pill">CrowdStrike</span><span class="skill-pill">MS Defender</span><span class="skill-pill">Alert Triage</span><span class="skill-pill">Active Directory</span></div>
-      </div>
-      <div class="skill-cat">
-        <div class="skill-cat-title">Scripting</div>
-        <div class="skill-list"><span class="skill-pill">Python</span><span class="skill-pill">PowerShell</span><span class="skill-pill">Bash</span><span class="skill-pill">KQL (learning)</span><span class="skill-pill">Automation</span></div>
-      </div>
-      <div class="skill-cat">
-        <div class="skill-cat-title">Frameworks</div>
-        <div class="skill-list"><span class="skill-pill">MITRE ATT&CK</span><span class="skill-pill">Cyber Kill Chain</span><span class="skill-pill">OWASP Top 10</span><span class="skill-pill">NIST</span><span class="skill-pill">ISO 27001</span><span class="skill-pill">ITIL</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="certs">
-    <div class="sec-label">05 // certifications.verify()</div>
-    <div class="sec-title">Certifications</div>
-    <div class="certs-grid">
-
-      <div class="cert-card">
-        <div class="cert-icon ms">🔷</div>
-        <div>
-          <div class="cert-name">Microsoft Sentinel</div>
-          <div class="cert-issuer">Udemy · Christopher Nett · 10hrs Lab</div>
-          <div class="cert-status done">✓ Completed</div>
-          <a class="cert-link" href="https://www.udemy.com/certificate/UC-855b0f70-6522-4845-9f4a-61bcfe8e8e7c/" target="_blank">&#128279; View Certificate</a>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <div class="cert-icon ec">🟠</div>
-        <div>
-          <div class="cert-name">Ethical Hacking Essentials (EHE)</div>
-          <div class="cert-issuer">EC-Council CodeRed</div>
-          <div class="cert-status done">✓ Verified</div>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <div class="cert-icon ec">🟠</div>
-        <div>
-          <div class="cert-name">Network Defense Essentials (NDE)</div>
-          <div class="cert-issuer">EC-Council CodeRed</div>
-          <div class="cert-status done">✓ Verified</div>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <div class="cert-icon gc">🟢</div>
-        <div>
-          <div class="cert-name">Google Cybersecurity Professional Certificate</div>
-          <div class="cert-issuer">Coursera</div>
-          <div class="cert-status done">✓ Verified</div>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <div class="cert-icon ms">🔷</div>
-        <div>
-          <div class="cert-name">Secure Access with Azure Active Directory</div>
-          <div class="cert-issuer">Coursera</div>
-          <div class="cert-status done">✓ Verified</div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="sec-label">06 // ping()</div>
-    <div class="sec-title">Contact</div>
-    <div class="contact-grid">
-      <a href="mailto:contact_rahul@yahoo.com" class="contact-item">
-        <div class="contact-item-icon">✉️</div>
-        <div class="contact-item-label">Email</div>
-        <div class="contact-item-val">contact_rahul@yahoo.com</div>
-      </a>
-      <a href="https://linkedin.com/in/rahulkram" class="contact-item">
-        <div class="contact-item-icon">💼</div>
-        <div class="contact-item-label">LinkedIn</div>
-        <div class="contact-item-val">linkedin.com/in/rahulkram</div>
-      </a>
-      <a href="https://github.com/cyb-sehgal" class="contact-item">
-        <div class="contact-item-icon">🐙</div>
-        <div class="contact-item-label">GitHub</div>
-        <div class="contact-item-val">github.com/cyb-sehgal</div>
-      </a>
-    </div>
-  </section>
-
-</div>
-
-<footer>
-  <div class="container">
-    <p>Built with purpose · <span>Rahul K.</span> · Cybersecurity Analyst · 2026</p>
-  </div>
-</footer>
-
+  <script src="js/main.js?v=1.2.0"></script>
 </body>
-</html>

@@ -1,0 +1,331 @@
+/* ========== KEYFRAME ANIMATIONS ========== */
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+@keyframes ring-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scroll-down {
+  0% { transform: scaleY(0); transform-origin: top; }
+  40% { transform: scaleY(1); transform-origin: top; }
+  60% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes counter-tick {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== SCROLL REVEAL CLASSES ========== */
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-up.visible,
+.fade-in-left.visible,
+.fade-in-right.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Delay utilities */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* ========== HERO HEADLINE ANIMATION ========== */
+
+.headline-line {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.headline-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: textShine 4s linear infinite;
+}
+
+/* ========== CARD SHIMMER EFFECT ========== */
+
+.comp-card,
+.project-card,
+.rec-card,
+.cert-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.comp-card::before,
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.03),
+    transparent
+  );
+  transition: none;
+  pointer-events: none;
+}
+
+.comp-card:hover::before,
+.project-card:hover::after {
+  animation: shimmer 0.8s ease-in-out;
+}
+
+/* ========== SOC DASHBOARD ANIMATIONS ========== */
+
+.soc-dashboard {
+  animation: float 6s ease-in-out infinite;
+}
+
+.bar {
+  animation: bar-grow 1s ease-out both;
+}
+
+.bar:nth-child(1) { animation-delay: 0.1s; }
+.bar:nth-child(2) { animation-delay: 0.15s; }
+.bar:nth-child(3) { animation-delay: 0.2s; }
+.bar:nth-child(4) { animation-delay: 0.25s; }
+.bar:nth-child(5) { animation-delay: 0.3s; }
+.bar:nth-child(6) { animation-delay: 0.35s; }
+.bar:nth-child(7) { animation-delay: 0.4s; }
+.bar:nth-child(8) { animation-delay: 0.45s; }
+.bar:nth-child(9) { animation-delay: 0.5s; }
+.bar:nth-child(10) { animation-delay: 0.55s; }
+.bar:nth-child(11) { animation-delay: 0.6s; }
+.bar:nth-child(12) { animation-delay: 0.65s; }
+
+@keyframes bar-grow {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--h);
+    opacity: 1;
+  }
+}
+
+/* Alert item entrance */
+.alert-item {
+  animation: fadeInLeft 0.5s ease-out both;
+}
+
+.alert-item:nth-child(1) { animation-delay: 0.6s; }
+.alert-item:nth-child(2) { animation-delay: 0.75s; }
+.alert-item:nth-child(3) { animation-delay: 0.9s; }
+
+/* ========== METRIC RING GLOW ========== */
+
+.metric-card:hover .ring-fill {
+  filter: drop-shadow(0 0 6px var(--accent-green));
+}
+
+.metric-card:nth-child(2):hover .ring-fill {
+  filter: drop-shadow(0 0 6px var(--accent-cyan));
+}
+
+.metric-card:nth-child(3):hover .ring-fill {
+  filter: drop-shadow(0 0 6px #9C27B0);
+}
+
+.metric-card:nth-child(4):hover .ring-fill {
+  filter: drop-shadow(0 0 6px #FF9800);
+}
+
+/* ========== TOOL BADGE HOVER GLOW ========== */
+
+.tool-badge:hover {
+  box-shadow: 0 4px 20px rgba(0, 230, 118, 0.1);
+}
+
+/* ========== NETWORK CANVAS BACKGROUND GRADIENT ========== */
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent, var(--bg-primary));
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-container { z-index: 1; }
+
+/* ========== PROJECT CARD HIDDEN STATE ========== */
+
+.project-card.hidden {
+  display: none;
+}
+
+/* ========== CUSTOM SCROLLBAR ========== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 230, 118, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 230, 118, 0.6);
+}
+
+/* ========== TEXT SELECTION STYLE ========== */
+
+::selection {
+  background: rgba(0, 230, 118, 0.25);
+  color: var(--text-primary);
+}
+
+/* ========== FOCUS STYLES (ACCESSIBILITY) ========== */
+
+:focus-visible {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ========== SKILL LEVEL BARS ========== */
+
+.skill-bar-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+  width: 0;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-bar-fill.animate {
+  width: var(--skill-level);
+}
+
+/* ========== TEXT SHINE ANIMATION ========== */
+@keyframes textShine {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+/* ========== SUBTITLE ANIMATION ========== */
+
+@keyframes subtitleFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
